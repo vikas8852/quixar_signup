@@ -110,7 +110,29 @@ const signup = async(req, res,next) => {
         
     }
  }
+ const logOut=(req,res)=>{
+    try{
+     const cookieOption={
+        expires:new Date(),
+        httpOnly:true
+     };
+     res.cookie("token",null,cookieOption);
+     res.status(200).json({
+        success:true,
+        message:"Logged Out"
+     })
+    }
+    catch(e){
+        res.status(400).json({
+            success:false,
+            message:e.message
+         })
+
+
+    }
+
+ }
 
 
   
-  module.exports = { signup,signin,getUser};
+  module.exports = { signup,signin,getUser,logOut};
